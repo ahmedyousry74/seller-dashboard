@@ -272,3 +272,9 @@ table{
         }
     }
 }
+.order-details{
+    flex-wrap: nowrap;
+    @media(max-width: 767px){
+        flex-wrap: wrap;
+    }
+}

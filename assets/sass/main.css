@@ -267,6 +267,15 @@ table tr td {
   padding: 15px !important;
 }
 
+.order-details {
+  flex-wrap: nowrap;
+}
+@media (max-width: 767px) {
+  .order-details {
+    flex-wrap: wrap;
+  }
+}
+
 .sidebar {
   position: fixed;
   top: 0;
