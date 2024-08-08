@@ -278,3 +278,13 @@ table{
         flex-wrap: wrap;
     }
 }
+
+.auth__layout{
+    .auth__form{
+        input{
+            &::placeholder{
+                font-size: 14px;
+            }
+        }
+    }
+  }
