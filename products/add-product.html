@@ -10,6 +10,8 @@
   <link rel="stylesheet" href="../assets/css/bootstrap.rtl.min.css" />
   <link rel="stylesheet" href="../assets/css/datatable.css" />
   <link rel="stylesheet" href="../assets/css/all.min.css" />
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
   <title>Seller Dashboard</title>
   <link rel="icon" href="../assets/images/logo-1.png" type="image/x-icon" />
 </head>
@@ -130,12 +132,6 @@
                 </div>
                 <div class="col-md-6">
                     <div class="d-flex justify-content-start align-items-start flex-column gap-1 mb-4">
-                        <label for="" class="text-third-color font-semibold text-[14px] mb-2"> الكمية</label>
-                        <input type="number" class="form-control text-third-color font-semibold text-[14px] h-[48px]" placeholder=" الكمية">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="d-flex justify-content-start align-items-start flex-column gap-1 mb-4">
                         <label for="" class="text-third-color font-semibold text-[14px] mb-2"> SKU </label>
                         <input type="text" class="form-control text-third-color font-semibold text-[14px] h-[48px]" placeholder=" SKU ">
                     </div>
@@ -155,40 +151,42 @@
                         <textarea type="text" class="form-control text-third-color font-semibold text-[14px] h-[48px]" placeholder=" وصف المنتج "></textarea>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="d-flex justify-content-start align-items-start flex-column gap-1 mb-4">
-                        <label for="" class="text-third-color font-semibold text-[14px] mb-2"> مقاس المنتج </label>
-                        <select
-                            name="class"
-                            id="class"
-                            class="form-select form-control h-[48px]"
-                            aria-label="Default select example"
-                            aria-placeholder="Segmentation*"
-                        >
-                            <option selected disabled>الحالة </option>
-                            <option value=""> مقاس 1 </option>
-                            <option value=""> مقاس 2 </option>
-                            <option value=""> مقاس 3  </option>
-                        </select>
+                <div id="product-section">
+                  <div class="row">
+                    <div class="col-md-6">
+                        <div class="d-flex justify-content-start align-items-start flex-column gap-1 mb-4">
+                            <label for="" class="text-third-color font-semibold text-[14px] mb-2"> مقاس المنتج </label>
+                            <select name="class" id="class" class="form-select form-control h-[48px]" aria-label="Default select example" aria-placeholder="Segmentation*">
+                                <option selected disabled>مقاس </option>
+                                <option value=""> مقاس 1 </option>
+                                <option value=""> مقاس 2 </option>
+                                <option value=""> مقاس 3  </option>
+                            </select>
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="d-flex justify-content-start align-items-start flex-column gap-1 mb-4">
-                        <label for="" class="text-third-color font-semibold text-[14px] mb-2"> لون المنتج </label>
-                        <select
-                            name="class"
-                            id="class"
-                            class="form-select form-control h-[48px]"
-                            aria-label="Default select example"
-                            aria-placeholder="Segmentation*"
-                        >
-                            <option selected disabled>لون المنتج  </option>
-                            <option value=""> لون 1 </option>
-                            <option value=""> لون 2  </option>
-                            <option value=""> لون 3  </option>
-                        </select>
+                    <div class="col-md-6">
+                        <div class="d-flex justify-content-start align-items-start flex-column gap-1 mb-4">
+                            <label for="" class="text-third-color font-semibold text-[14px] mb-2"> الكمية</label>
+                            <input type="number" class="form-control text-third-color font-semibold text-[14px] h-[48px]" placeholder=" الكمية">
+                        </div>
                     </div>
-                </div>
+                    <div class="col-md-6">
+                        <div class="d-flex justify-content-start align-items-start flex-column gap-1 mb-4">
+                            <label for="" class="text-third-color font-semibold text-[14px] mb-2"> لون المنتج </label>
+                            <select multiple="multiple" class="form-select form-control h-[48px] colorMultiple">
+                                <option value="1">لون 1 </option>
+                                <option value="2">لون 2</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <button class="rounded-[4px] shadow-sm py-[8px] px-[8px] plus_sec"> 
+                            <img src="../assets/images/plus.svg" alt=""> 
+                        </button>
+                    </div>
+                    <hr>
+                  </div>
+              </div>              
                 <div class="flex justify-start items-start flex-row">
                     <button type="submit" class="bg-primary-color text-[#fff] py-[8px] px-[15px] rounded-[6px] mt-4 w-[250px]"> إضافة </button>
                 </div>
@@ -203,6 +201,92 @@
   <script src="../assets/js/datatable.js"></script>
   <script src="../assets/js/all.min.js"></script>
   <script src="../assets/js/main.js"></script>
+ <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+ <script>
+  $(document).ready(function() {
+      $('.colorMultiple').select2({
+            placeholder: "الكتاب",
+            allowClear: true
+      })
+  });
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const productSection = document.getElementById('product-section');
+    let selectCounter = 1; // Counter to ensure unique IDs
+
+    // Handle the plus button click
+    productSection.addEventListener('click', function(event) {
+        event.preventDefault(); // Prevent the default button action
+        
+        if (event.target.closest('.plus_sec')) {
+            appendNewSection();
+        } else if (event.target.closest('.delete_sec')) {
+            deleteSection(event);
+        }
+    });
+
+    function appendNewSection() {
+        const newSection = document.createElement('div');
+        newSection.classList.add('row');
+        const uniqueId = `colorMultiple-${selectCounter++}`; // Create a unique ID
+        
+        newSection.innerHTML = `
+            <div class="col-md-6">
+              <div class="d-flex justify-content-start align-items-start flex-column gap-1 mb-4">
+                <label class="text-third-color font-semibold text-[14px] mb-2"> مقاس المنتج </label>
+                <select name="class" class="form-select form-control h-[48px]">
+                  <option selected disabled>مقاس </option>
+                  <option value=""> مقاس 1 </option>
+                  <option value=""> مقاس 2 </option>
+                  <option value=""> مقاس 3  </option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="d-flex justify-content-start align-items-start flex-column gap-1 mb-4">
+                <label class="text-third-color font-semibold text-[14px] mb-2"> الكمية</label>
+                <input type="number" class="form-control text-third-color font-semibold text-[14px] h-[48px]" placeholder=" الكمية">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="d-flex justify-content-start align-items-start flex-column gap-1 mb-4">
+                <label class="text-third-color font-semibold text-[14px] mb-2"> لون المنتج </label>
+                <select id="${uniqueId}" multiple="multiple" class="form-select form-control h-[48px]">
+                  <option value="1">لون 1 </option>
+                  <option value="2">لون 2</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <button class="rounded-[4px] shadow-sm py-[8px] px-[8px] delete_sec"> 
+                <img src="../assets/images/trash-03.svg" alt="Delete"> 
+              </button>
+            </div>
+            <hr>
+        `;
+
+        productSection.appendChild(newSection);
+
+        // Initialize select2 for the new select element
+        $(`#${uniqueId}`).select2({
+            placeholder: "الكتاب",
+            allowClear: true
+        });
+    }
+
+    function deleteSection(event) {
+        const sectionToDelete = event.target.closest('.row');
+        if (sectionToDelete) {
+            productSection.removeChild(sectionToDelete);
+        }
+    }
+});
+
+
+</script>
 </body>
 
 </html>
