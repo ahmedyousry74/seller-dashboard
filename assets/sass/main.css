@@ -19,8 +19,8 @@ body {
   overflow-y: scroll !important;
 }
 
-::-webkit-scrollbar-thumb {
-  background-color: #DEF9EC;
+::-webkit-scrollbar-thumb, .sidebar.open::-webkit-scrollbar-thumb {
+  background-color: #3BB77E;
   border-radius: 0px;
   height: 4px;
 }
@@ -307,6 +307,22 @@ table tr td {
   direction: rtl !important;
   padding-inline-start: 11px !important;
   font-family: "Cairo" !important;
+}
+
+.sidebar {
+  overflow-y: scroll;
+}
+
+.sidebar::-webkit-scrollbar-thumb, .sidebar.open::-webkit-scrollbar-thumb {
+  background-color: #3BB77E !important;
+  border-radius: 0px;
+  height: 4px;
+}
+
+.sidebar::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+  background-color: transparent;
 }
 
 .sidebar {
